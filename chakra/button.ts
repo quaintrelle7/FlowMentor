@@ -22,9 +22,9 @@ export const Button: ComponentStyleConfig = {
   variants: {
     solid: {
       color: "white",
-      bg: "#FF7F11",
+      bg: "#8E4585",
       _hover: {
-        bg: "#ac63e9",
+        bg: "#8E4585",
       },
     },
 

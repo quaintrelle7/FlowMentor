@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-    Flex, Box, 
-  
+    Flex, Box,
+    Center,
     Stack,
     Heading,
     Text,
@@ -10,6 +10,9 @@ import {
 import { Card } from '@chakra-ui/react';
 import CaptionCarousel from './CaptionCarousel';
 import WithSpeechBubbles from './Testimonial';
+import Link from 'next/link';
+import SocialProfile from './SocialProfile';
+import RegisterMentor from '../PopUp/RegisterMentor';
 
 
 type HomePageProps = {
@@ -19,13 +22,13 @@ type HomePageProps = {
 
 
 const HomePage: React.FC<HomePageProps> = () => {
-   
+
 
     return (
         <Box backgroundColor={"brand.300"} p={10}>
-           
 
-          <CaptionCarousel/>
+
+            <CaptionCarousel />
             <Flex justifyContent={"space-around"} my={20} width={"50%"} mx={"25%"}>
                 <Card p={2} backgroundColor={"brand.200"} width={"200px"} height={"80px"}>
                     <Stack alignItems={"center"} >
@@ -35,17 +38,28 @@ const HomePage: React.FC<HomePageProps> = () => {
                         <Text fontSize={"25px"}>A Mentor</Text>
                     </Stack>
                 </Card>
+               
+                <Link href={"../Modals/RegisterMenteeForm"}>
+                    <Card p={2} backgroundColor={"brand.200"} width={"200px"} height={"80px"}>
+                        <Stack alignItems={"center"} >
 
-                <Card p={2} backgroundColor={"brand.200"} width={"200px"} height={"80px"}>
-                    <Stack alignItems={"center"} >
+                            <Text> Join as</Text>
 
-                        <Text> Join as</Text>
+                            <Text fontSize={"25px"}>A Mentee</Text>
+                        </Stack>
+                    </Card>
+                </Link>
 
-                        <Text fontSize={"25px"}>A Mentee</Text>
-                    </Stack>
-                </Card>
             </Flex>
-          <WithSpeechBubbles/>
+            <Box>
+                <Heading color={"brand.100"}>Featured Mentors</Heading>
+                <Flex justifyContent={"space-between"}>
+                    <SocialProfile /><SocialProfile /><SocialProfile />
+                    <SocialProfile />
+                </Flex>
+            </Box>
+            <Heading my={5} color={"brand.100"}>Testimonials </Heading>
+            <WithSpeechBubbles />
 
         </Box>
     )
