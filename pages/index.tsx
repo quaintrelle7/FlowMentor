@@ -97,9 +97,6 @@ export default function Home() {
 
       <HomePage />
       <div>
-
-
-
         <div>
           <Button onClick={handleGetName}>Get Name</Button>
           <h1>{name}</h1>

@@ -6,10 +6,12 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# and then 
+flow emulator start
+# and then
+flow dev-wallet
+# and then
+flow project deploy --network=emulator
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
