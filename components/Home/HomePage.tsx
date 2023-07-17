@@ -8,11 +8,11 @@ import {
     Container,
 } from '@chakra-ui/layout';
 import { Card } from '@chakra-ui/react';
-import CaptionCarousel from './CaptionCarousel';
 import WithSpeechBubbles from './Testimonial';
 import Link from 'next/link';
 import SocialProfile from './SocialProfile';
 import RegisterMentor from '../PopUp/RegisterMentor';
+import FeatureContent from './FeatureContent';
 
 
 type HomePageProps = {
@@ -28,8 +28,8 @@ const HomePage: React.FC<HomePageProps> = () => {
         <Box backgroundColor={"brand.300"} p={10}>
 
 
-            <CaptionCarousel />
-            <Flex justifyContent={"space-around"} my={20} width={"50%"} mx={"25%"}>
+           <FeatureContent/>
+            {/* <Flex justifyContent={"space-around"} my={20} width={"50%"} mx={"25%"}>
                 <Card p={2} backgroundColor={"brand.200"} width={"200px"} height={"80px"}>
                     <Stack alignItems={"center"} >
 
@@ -50,7 +50,7 @@ const HomePage: React.FC<HomePageProps> = () => {
                     </Card>
                 </Link>
 
-            </Flex>
+            </Flex> */}
             <Box>
                 <Heading color={"brand.100"}>Featured Mentors</Heading>
                 <Flex justifyContent={"space-between"}>

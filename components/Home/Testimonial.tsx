@@ -90,34 +90,32 @@ export default function WithSpeechBubbles() {
         <Box bg={useColorModeValue('gray.100', 'gray.700')}>
             <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
                 <Stack spacing={0} align={'center'}>
-                    <Heading>Our Clients Speak</Heading>
-                    <Text>We have been working with clients around the world</Text>
+                    <Heading>Featured Stories</Heading>
+                    <Text>We have been connecting Mentors and Mentees around the world</Text>
                 </Stack>
                 <Stack
                     direction={{ base: 'column', md: 'row' }}
                     spacing={{ base: 10, md: 4, lg: 10 }}>
                     <Testimonial>
                         <TestimonialContent>
-                            <TestimonialHeading>Efficient Collaborating</TestimonialHeading>
+                            <TestimonialHeading>Great Experience</TestimonialHeading>
                             <TestimonialText>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                                neque sed imperdiet nibh lectus feugiat nunc sem.
+                                I have been using the mentorship platform for the past six months, and I must say it has been an incredible experience.
                             </TestimonialText>
                         </TestimonialContent>
                         <TestimonialAvatar
                             src={
                                 'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
                             }
-                            name={'Jane Cooper'}
+                            name={'Anne Shirley'}
                             title={'CEO at ABC Corporation'}
                         />
                     </Testimonial>
                     <Testimonial>
                         <TestimonialContent>
-                            <TestimonialHeading>Intuitive Design</TestimonialHeading>
+                            <TestimonialHeading>Right Choice</TestimonialHeading>
                             <TestimonialText>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                                neque sed imperdiet nibh lectus feugiat nunc sem.
+                                As a recent graduate, I was feeling lost and unsure about the next steps in my career. Joining the mentorship platform was a game-changer for me.
                             </TestimonialText>
                         </TestimonialContent>
                         <TestimonialAvatar
@@ -125,23 +123,22 @@ export default function WithSpeechBubbles() {
                                 'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
                             }
                             name={'Jane Cooper'}
-                            title={'CEO at ABC Corporation'}
+                            title={'Student at Stanford'}
                         />
                     </Testimonial>
                     <Testimonial>
                         <TestimonialContent>
                             <TestimonialHeading>Mindblowing Service</TestimonialHeading>
                             <TestimonialText>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                                neque sed imperdiet nibh lectus feugiat nunc sem.
+                                The process of finding a mentor was seamless, and the platform user-friendly interface made communication convenient
                             </TestimonialText>
                         </TestimonialContent>
                         <TestimonialAvatar
                             src={
                                 'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
                             }
-                            name={'Jane Cooper'}
-                            title={'CEO at ABC Corporation'}
+                            name={'Investment Banker'}
+                            title={'Investor at JP Morgan'}
                         />
                     </Testimonial>
                 </Stack>

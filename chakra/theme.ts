@@ -6,9 +6,9 @@ import { Button } from "./button";
 export const theme = extendTheme({
   colors: {
     brand: {
-      100: "#A5B5BF",
-      200: "#8E4585",
-      300: "#0E0004",
+      100: "#000",
+      200: "#6F1AB6",
+      300: "#8bb8b3",
     },
   },
 
@@ -19,7 +19,7 @@ export const theme = extendTheme({
   styles: {
     global: () => ({
       body: {
-        bg: "gray.200",
+        bg: "#8bb8b3",
       },
     }),
   },

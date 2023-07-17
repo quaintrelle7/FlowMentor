@@ -11,6 +11,7 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 import RegisterMentor from '../PopUp/RegisterMentor';
+import ScheduleCall from '../PopUp/ScheduleCall';
 
 export default function SocialProfile() {
     return (
@@ -66,9 +67,10 @@ export default function SocialProfile() {
                         </Stack>
                     </Stack>
 
-                    
-                        <RegisterMentor />
-                    
+                    <Box ml={12} mt={2}>
+                        <ScheduleCall price={5} />
+                    </Box>
+
                 </Box>
             </Box>
         </Center>
