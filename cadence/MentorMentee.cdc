@@ -1,4 +1,4 @@
-access(all) contract HelloWorld {
+access(all) contract MentorMentee {
 
    pub struct Person {
         pub var menteeName: String
@@ -81,7 +81,7 @@ access(all) contract HelloWorld {
     access(all) fun giveFeedback(id: Int, name: String, rating: Int){
         pre {
             self.mentorMentee[id]!.menteeName == name: "Wrong Mentee" 
-            self.mentorMentee[id]!.meetingStatus == "Completed": "Already provided feedback" 
+            self.mentorMentee[id]!.meetingStatus != "Completed": "Already provided feedback" 
         }        
         self.mentorMentee[id]!.changeStatus(meetingStatus: "Completed") 
         var oldRating = self.ratingRecord[self.mentorMentee[id]!.mentorName]
@@ -91,6 +91,9 @@ access(all) contract HelloWorld {
      access(all) fun cancelItByMentee(id: Int, name: String){
         pre {
             self.mentorMentee[id]!.menteeName == name: "Wrong Mentee" 
+            self.mentorMentee[id]!.meetingStatus != "Cancelled By Mentee": "Already Cancelled by You!" 
+            self.mentorMentee[id]!.meetingStatus != "Cancelled By Mentor": "Already Cancelled by Mentor!" 
+            self.mentorMentee[id]!.meetingStatus != "Completed": "Already provided feedback" 
         }
         self.mentorMentee[id]!.changeStatus(meetingStatus: "Cancelled By Mentee")           
     }   
@@ -98,6 +101,9 @@ access(all) contract HelloWorld {
     access(all) fun cancelItByMentor(id: Int, name: String){
         pre {
             self.mentorMentee[id]!.mentorName == name: "Wrong Mentor" 
+            self.mentorMentee[id]!.meetingStatus != "Cancelled By Mentee": "Already Cancelled by Mentee!" 
+            self.mentorMentee[id]!.meetingStatus != "Cancelled By Mentor": "Already Cancelled by You!" 
+            self.mentorMentee[id]!.meetingStatus != "Completed": "Already provided feedback" 
         }
         self.mentorMentee[id]!.changeStatus(meetingStatus: "Cancelled By Mentor")           
     }
