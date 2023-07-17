@@ -286,6 +286,8 @@ export default function Home() {
 		console.log(decodedResponse);
 	};
 
+
+
 	const setValuesForCancelMeetingByMentee = () => {
 		setId(2);
 		setMenteeName("tushar");
@@ -343,19 +345,19 @@ export default function Home() {
 			<HomePage />
 			<div>
 				<div>
-					<Button onClick={setValuesForMeeting}> setValuesForMeeting</Button>
-					<Button onClick={RequestMeeting}> RequestMeeting</Button>
+					{/* <Button onClick={setValuesForMeeting}> setValuesForMeeting</Button> */}
+					{/* <Button onClick={RequestMeeting}> RequestMeeting</Button> */}
 					<br />
           
-					<Button onClick={setValuesForgetMeetingData}> setValuesForgetMeetingData</Button>
-					<Button onClick={getMeetingData}> getMeetingData</Button>
+					{/* <Button onClick={setValuesForgetMeetingData}> setValuesForgetMeetingData</Button> */}
+					{/* <Button onClick={getMeetingData}> getMeetingData</Button> */}
 					<br />
 					<br />
-					<Button onClick={setValuesForPlanMeeting}> setValuesForPlanMeeting</Button>
-					<Button onClick={PlanMeeting}> PlanMeeting</Button>
+					{/* <Button onClick={setValuesForPlanMeeting}> setValuesForPlanMeeting</Button> */}
+					{/* <Button onClick={PlanMeeting}> PlanMeeting</Button> */}
 					<br />
 					<br />
-					<Button onClick={setValuesForRescheduleMeet}>
+					{/* <Button onClick={setValuesForRescheduleMeet}>
 						{" "}
 						setValuesForRescheduleMeet
 					</Button>
@@ -383,12 +385,12 @@ export default function Home() {
 					</Button>
 					<Button onClick={CancelMeetingByMentor}> CancelMeetingByMentor</Button>
 					<br />
-					<br />
+					<br /> */}
 					{/* complete planmeeting, reschedule meeting,   give feedback, cancelmeeting, and getrating */}
 
-					<Button onClick={handleGetHello}>Get Name</Button>
+					{/* <Button onClick={handleGetHello}>Get Name</Button>
 					<h1>{name}</h1>
-					<Button onClick={setHello}>Change Name</Button>
+					<Button onClick={setHello}>Change Name</Button> */}
 					{/* <Input type="text" onChange={(e) => setNewName(e.target.value)} /> */}
 				</div>
 			</div>
