@@ -13,6 +13,7 @@ import {
     Button,
     Center, Box
 } from '@chakra-ui/react'
+import ReScheduleCall from '@/components/PopUp/RescheduleCall';
 
 type MeetsProps = {
 
@@ -50,8 +51,7 @@ const Meets: React.FC<MeetsProps> = () => {
                         <Td> Raju </Td>
                         <Td>2</Td>
                         <Td>200</Td>
-                        <Td><Button fontSize={"15"}
-                            rounded={'md'} onClick={handleReschedule} > Reschedule</Button></Td>
+                        <Td><ReScheduleCall/></Td>
                         <Td><Button fontSize={"15"}
                             rounded={'md'} bg={'red.500'}  _hover={{bg:"red.700"}}
                             onClick={handleCancel}> Cancel</Button></Td>

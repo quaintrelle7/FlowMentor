@@ -1,21 +1,19 @@
-import { Box, Button, Flex, FormLabel, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, useColorModeValue, ModalFooter, ModalOverlay, Stack, Text, Textarea, useDisclosure, Input } from '@chakra-ui/react';
+import { Box, Button, Flex, FormLabel, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, useColorModeValue, ModalFooter, ModalOverlay, Text, Textarea, useDisclosure, Input, Center, Stack } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
 
-type ScheduleCallProps = {
+type ReScheduleCallProps = {
     //Wallet adddress of mentee
 
     // open: boolean;
 
     // //callback function that doesn't return anything
     // handleClose: () => void;
-    price: number;
+
 };
 
-const ScheduleCall: React.FC<ScheduleCallProps> = (props) => {
+const ReScheduleCall: React.FC<ReScheduleCallProps> = () => {
 
-    const [hour, setHour] = useState(0);
-    const [totalPrice, setTotalPrice] = useState(0);
     const [date, setDate] = useState("");
 
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -50,7 +48,7 @@ const ScheduleCall: React.FC<ScheduleCallProps> = (props) => {
         <>
             <Button
 
-                bg={"black"}
+                bg={"#6F1AB6"}
                 color={'white'}
                 fontSize={"15"}
                 rounded={'md'}
@@ -59,7 +57,7 @@ const ScheduleCall: React.FC<ScheduleCallProps> = (props) => {
                     boxShadow: 'lg',
                 }}
 
-                onClick={onOpen}>Schedule Meet</Button>
+                onClick={onOpen}>Reschedule</Button>
             {/* <Button ml={4} ref={finalRef}>
                 I wil receive focus on close
             </Button> */}
@@ -87,18 +85,9 @@ const ScheduleCall: React.FC<ScheduleCallProps> = (props) => {
 
                                 <Flex justifyContent={"space-between"}>
 
-                                    <Box width={"160px"}>
-                                        <FormLabel fontWeight={800}>No. of Hours</FormLabel>
-                                        <Input
-                                            mb={7}
-                                            type='number'
-                                            name='hour'
-                                            value={hour}
-                                            onChange={(e) => {
-                                                setHour(parseInt(`${e.target.value}`));
-                                                setTotalPrice(parseInt(`${e.target.value}`) * props.price as number);
-                                            }}
-                                            ref={initialRef} placeholder='Hours' />
+                                    <Stack >
+
+                                        <FormLabel>Select Date and Time</FormLabel>
                                         <Input
                                             placeholder="Select Date and Time"
                                             size="md"
@@ -108,19 +97,20 @@ const ScheduleCall: React.FC<ScheduleCallProps> = (props) => {
                                             type="datetime-local"
                                         />
 
-                                    </Box>
-                                    <Box>
-                                        <FormLabel fontWeight={800}>Total price</FormLabel>
-                                        <Text>{totalPrice}</Text>
-                                    </Box>
+
+
+                                        <Flex mt={5} justifyContent={"flex-end"}>
+                                            <Button type="submit" colorScheme='blue' mr={3}>
+                                                Schedule
+                                            </Button>
+                                            <Button onClick={onClose} bg={"red.500"}>Cancel</Button>
+                                        </Flex>
+
+                                    </Stack>
+
                                 </Flex>
 
-                                <Flex justifyContent={"flex-end"}>
-                                    <Button type="submit" colorScheme='blue' mr={3}>
-                                        Schedule
-                                    </Button>
-                                    <Button onClick={onClose} bg={"red.500"}>Cancel</Button>
-                                </Flex>
+
 
                             </form>
 
@@ -149,4 +139,4 @@ const ScheduleCall: React.FC<ScheduleCallProps> = (props) => {
         </>
     )
 }
-export default ScheduleCall;
+export default ReScheduleCall;

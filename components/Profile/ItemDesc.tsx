@@ -11,8 +11,8 @@ import {
     HStack,
 } from '@chakra-ui/react';
 import { BsArrowUpRight, BsHeartFill, BsHeart } from 'react-icons/bs';
-import BuyProperty from '../PopUp/ScheduleCall';
 import ScheduleCall from '../PopUp/ScheduleCall';
+import Feedback from '../PopUp/Feedback';
 
 
 
@@ -32,7 +32,6 @@ type ItemDescProps = {
 
 const ItemDesc: React.FC<ItemDescProps> = (props) => {
 
-    const [liked, setLiked] = useState(false);
     return (
         <Center py={6}>
             <Box
@@ -98,20 +97,7 @@ const ItemDesc: React.FC<ItemDescProps> = (props) => {
                         <BsArrowUpRight />
                     </Flex>
                     <ScheduleCall price={props.price} />
-                    <Flex
-                        p={4}
-                        alignItems="center"
-                        justifyContent={'space-between'}
-                        roundedBottom={'sm'}
-                        borderLeft={'1px'}
-                        cursor="pointer"
-                        onClick={() => setLiked(!liked)}>
-                        {liked ? (
-                            <BsHeartFill fill="red" fontSize={'24px'} />
-                        ) : (
-                            <BsHeart fontSize={'24px'} />
-                        )}
-                    </Flex>
+                    <Feedback/>
                 </HStack>
             </Box>
         </Center>
