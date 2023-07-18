@@ -1,5 +1,7 @@
 import { Box, Button, Flex, FormLabel, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, useColorModeValue, ModalFooter, ModalOverlay, Stack, Text, Textarea, useDisclosure, Input } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import * as fcl from "@onflow/fcl";
+import * as t from "@onflow/types";
 
 
 type ScheduleCallProps = {
@@ -11,6 +13,18 @@ type ScheduleCallProps = {
     // handleClose: () => void;
     price: number;
 };
+
+
+fcl.config({
+	//Emulator
+	"accessNode.api": "http://localhost:8888",
+	"app.detail.title": "Sharayu's Flow Wallet",
+
+	//wallet to interact with emulator
+	"discovery.wallet": "http://localhost:8701/fcl/authn",
+	"0xMentorMentee": "0xf8d6e0586b0a20c7",
+});
+
 
 const ScheduleCall: React.FC<ScheduleCallProps> = (props) => {
 
@@ -46,6 +60,50 @@ const ScheduleCall: React.FC<ScheduleCallProps> = (props) => {
 
 
     }
+
+    // const setValuesForMeeting = () => {
+	// 	setMenteeName("tushar");
+	// 	setMentorName("raju");
+	// 	setPrice("99245");
+	// 	setService("blockchain");
+	// 	setCurrentTimestamp("1323124");
+	// 	setMeetingSchedule("234565");
+	// 	setMeetingStatus("scheduled");
+	// };
+
+	const RequestMeeting = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+		const txId = await fcl.send([
+			fcl.transaction`    
+      import MentorMentee from 0xMentorMentee
+      transaction(menteeName: String, mentorName: String, price: Int, service: String, currentTimestamp: String, meetingSchedule: String, meetingStatus: String) {
+
+        prepare(acc: AuthAccount) {}
+      
+        execute {
+          MentorMentee.setMeeting(menteeName: menteeName, mentorName: mentorName, price: price, service: service, currentTimestamp: currentTimestamp, meetingSchedule: meetingSchedule, meetingStatus: meetingStatus)
+        }
+      }
+      `,
+			fcl.args([
+				fcl.arg("tushar", t.String),
+				fcl.arg("emily", t.String),
+				fcl.arg(100, t.Int),
+				fcl.arg("Finance Advice", t.String),
+				fcl.arg("1689625731", t.String),
+				fcl.arg("1689627731", t.String),
+				fcl.arg("Scheduled", t.String),
+			]),
+			fcl.proposer(fcl.authz),
+			fcl.payer(fcl.authz),
+			fcl.authorizations([fcl.authz]),
+		]);
+        setShowSuccessMessage(true);
+        setShowFailureMessage(false);
+        onClose()
+	};
+
     return (
         <>
             <Button
@@ -82,7 +140,7 @@ const ScheduleCall: React.FC<ScheduleCallProps> = (props) => {
 
                         <Box p={1} mt={5} >
 
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={RequestMeeting}>
 
 
                                 <Flex justifyContent={"space-between"}>

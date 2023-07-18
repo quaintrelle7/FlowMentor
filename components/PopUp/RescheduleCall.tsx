@@ -1,6 +1,7 @@
 import { Box, Button, Flex, FormLabel, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, useColorModeValue, ModalFooter, ModalOverlay, Text, Textarea, useDisclosure, Input, Center, Stack } from '@chakra-ui/react';
 import React, { useState } from 'react';
-
+import * as fcl from "@onflow/fcl";
+import * as t from "@onflow/types";
 
 type ReScheduleCallProps = {
     //Wallet adddress of mentee
@@ -12,7 +13,17 @@ type ReScheduleCallProps = {
 
 };
 
-const ReScheduleCall: React.FC<ReScheduleCallProps> = () => {
+fcl.config({
+	//Emulator
+	"accessNode.api": "http://localhost:8888",
+	"app.detail.title": "Sharayu's Flow Wallet",
+
+	//wallet to interact with emulator
+	"discovery.wallet": "http://localhost:8701/fcl/authn",
+	"0xMentorMentee": "0xf8d6e0586b0a20c7",
+});
+
+const ReScheduleCall: React.FC<ReScheduleCallProps> = (props) => {
 
     const [date, setDate] = useState("");
 
@@ -41,10 +52,39 @@ const ReScheduleCall: React.FC<ReScheduleCallProps> = () => {
 
         setShowSuccessMessage(true);
         setShowFailureMessage(false);
-
+        props.updatetime()
 
     }
-    return (
+
+    const onsubmit = async () => {
+        props.updatetime()
+
+		const txId = await fcl.send([
+			fcl.transaction`    
+      import MentorMentee from 0xMentorMentee
+      transaction(id: Int, name: String, timeStampe: String) {
+
+        prepare(acc: AuthAccount) {}
+      
+        execute {
+          MentorMentee.reschedule(id: id, name: name, timeStampe: timeStampe)
+        }
+      }
+      `,
+			fcl.args([
+				fcl.arg(0, t.Int),
+				fcl.arg("emily", t.String),
+				fcl.arg("1689731292", t.String),
+			]),
+			fcl.proposer(fcl.authz),
+			fcl.payer(fcl.authz),
+			fcl.authorizations([fcl.authz]),
+		]);
+        onClose();
+
+	};
+
+        return (
         <>
             <Button
 
@@ -100,7 +140,7 @@ const ReScheduleCall: React.FC<ReScheduleCallProps> = () => {
 
 
                                         <Flex mt={5} justifyContent={"flex-end"}>
-                                            <Button type="submit" colorScheme='blue' mr={3}>
+                                            <Button onClick={onsubmit} colorScheme='blue' mr={3}>
                                                 Schedule
                                             </Button>
                                             <Button onClick={onClose} bg={"red.500"}>Cancel</Button>

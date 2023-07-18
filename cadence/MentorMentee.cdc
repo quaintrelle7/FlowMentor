@@ -1,4 +1,4 @@
-contract MentorMentee {
+access(all) contract MentorMentee {
 
    pub struct Person {
         pub var menteeName: String
@@ -30,14 +30,14 @@ contract MentorMentee {
 
     access(all) var meetingCount: Int
     access(all) var greeting: String
-    access(all) var myDictionary: {Int: Person}
+    access(all) var mentorMentee: {Int: Person}
     access(all) var ratingRecord: {String: Int}
 
     // The init() function is required if the contract contains any fields.
     init() {
-      self.greeting = "Hello from account 3!"
+      self.greeting = "Hello from account!"
       self.meetingCount = 0
-      self.myDictionary = {}
+      self.mentorMentee = {}
       self.ratingRecord = {}
     }
 
@@ -50,14 +50,14 @@ contract MentorMentee {
       self.greeting = "New Hello!"
     }
 
-    access(all) fun setValue(menteeName: String, mentorName: String, price: Int, service: String, currentTimestamp: String, meetingSchedule: String, meetingStatus: String) {
+    access(all) fun setMeeting(menteeName: String, mentorName: String, price: Int, service: String, currentTimestamp: String, meetingSchedule: String, meetingStatus: String) {
         let person = Person(_menteeName: menteeName, _mentorName: mentorName, _price: price, _service: service, _currentTimestamp: currentTimestamp, _meetingSchedule: meetingSchedule, _meetingStatus: meetingStatus)
-        self.myDictionary[self.meetingCount] = person
+        self.mentorMentee[self.meetingCount] = person
         self.meetingCount = self.meetingCount + 1
     }
 
-    access(all) fun getValue(id: Int): Person? {
-        return self.myDictionary[id]
+    access(all) fun getMeetingDetail(id: Int): Person? {
+        return self.mentorMentee[id]
     }
  
     access(all) fun getRating(name: String): Int? {
@@ -66,40 +66,46 @@ contract MentorMentee {
  
     access(all) fun confirmMeeting(id: Int, name: String){
         pre {
-            self.myDictionary[id]!.mentorName == name: "Wrong Mentor" 
+            self.mentorMentee[id]!.mentorName == name: "Wrong Mentor" 
         }
-        self.myDictionary[id]!.changeStatus(meetingStatus: "Planned") 
+        self.mentorMentee[id]!.changeStatus(meetingStatus: "Planned") 
     }
 
     access(all) fun reschedule(id: Int, name: String, timeStampe: String){
         pre {
-            self.myDictionary[id]!.mentorName == name: "Wrong Mentor" 
+            self.mentorMentee[id]!.mentorName == name: "Wrong Mentor" 
         }
-        self.myDictionary[id]!.changeMeetSchedule(meetingSchedule: timeStampe) 
+        self.mentorMentee[id]!.changeMeetSchedule(meetingSchedule: timeStampe) 
     }
 
     access(all) fun giveFeedback(id: Int, name: String, rating: Int){
         pre {
-            self.myDictionary[id]!.menteeName == name: "Wrong Mentee" 
-            self.myDictionary[id]!.meetingStatus == "Completed": "Already provided feedback" 
+            self.mentorMentee[id]!.menteeName == name: "Wrong Mentee" 
+            self.mentorMentee[id]!.meetingStatus != "Completed": "Already provided feedback" 
         }        
-        self.myDictionary[id]!.changeStatus(meetingStatus: "Completed") 
-        var oldRating = self.ratingRecord[self.myDictionary[id]!.mentorName]
-        self.ratingRecord[self.myDictionary[id]!.mentorName] = (oldRating??0) + rating
+        self.mentorMentee[id]!.changeStatus(meetingStatus: "Completed") 
+        var oldRating = self.ratingRecord[self.mentorMentee[id]!.mentorName]
+        self.ratingRecord[self.mentorMentee[id]!.mentorName] = (oldRating??0) + rating
     }
 
      access(all) fun cancelItByMentee(id: Int, name: String){
         pre {
-            self.myDictionary[id]!.menteeName == name: "Wrong Mentee" 
+            self.mentorMentee[id]!.menteeName == name: "Wrong Mentee" 
+            self.mentorMentee[id]!.meetingStatus != "Cancelled By Mentee": "Already Cancelled by You!" 
+            self.mentorMentee[id]!.meetingStatus != "Cancelled By Mentor": "Already Cancelled by Mentor!" 
+            self.mentorMentee[id]!.meetingStatus != "Completed": "Already provided feedback" 
         }
-        self.myDictionary[id]!.changeStatus(meetingStatus: "Cancelled By Mentee")           
+        self.mentorMentee[id]!.changeStatus(meetingStatus: "Cancelled By Mentee")           
     }   
 
     access(all) fun cancelItByMentor(id: Int, name: String){
         pre {
-            self.myDictionary[id]!.mentorName == name: "Wrong Mentor" 
+            self.mentorMentee[id]!.mentorName == name: "Wrong Mentor" 
+            self.mentorMentee[id]!.meetingStatus != "Cancelled By Mentee": "Already Cancelled by Mentee!" 
+            self.mentorMentee[id]!.meetingStatus != "Cancelled By Mentor": "Already Cancelled by You!" 
+            self.mentorMentee[id]!.meetingStatus != "Completed": "Already provided feedback" 
         }
-        self.myDictionary[id]!.changeStatus(meetingStatus: "Cancelled By Mentor")           
+        self.mentorMentee[id]!.changeStatus(meetingStatus: "Cancelled By Mentor")           
     }
 
 }
